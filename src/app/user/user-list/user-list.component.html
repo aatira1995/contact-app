@@ -26,6 +26,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <mat-paginator [pageSize]="pageSize" [length]="totalDataCount" (page)="pageChanges($event)"></mat-paginator>
+  <mat-paginator [pageSize]="pageSize" [length]="totalDataCount" ></mat-paginator>
 </div>
 <ngx-spinner></ngx-spinner>

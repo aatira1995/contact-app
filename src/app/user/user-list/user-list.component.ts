@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, ContentChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserDataService } from '../user-data.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ContactInterface } from '../../common/interfaces/contact.interface';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
+import { tap } from 'rxjs/operators'
 
 import _ from 'lodash';
 
@@ -25,15 +26,10 @@ export class UserListComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) { }
 
-  dataSource = new MatTableDataSource<ContactInterface>([]);
+  dataSource = new MatTableDataSource<ContactInterface>();
   displayedColumns: string[] = ['first_name', 'last_name', 'email'];
 
-  // @ViewChild(MatPaginator,  {static: false}) 
-  // set paginator(value: MatPaginator) {
-  //   this.dataSource.paginator = value;
-  // }
-
-  @ViewChild(MatPaginator,  {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator,  {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort,  {static: true}) sort: MatSort;
 
   ngOnInit() {
@@ -41,7 +37,11 @@ export class UserListComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+    this.paginator.page
+            .pipe(
+                tap(() => this.getUserContactList(this.paginator.pageIndex + 1))
+            )
+            .subscribe();
     this.dataSource.sort = this.sort;
   }
 
@@ -58,7 +58,6 @@ export class UserListComponent implements OnInit {
           return contact
         });
         this.dataSource.data = _.sortBy(this.dataSource.data, ['first_name', 'last_name', 'email']);
-        this.dataSource.paginator = this.paginator;
         this.pageSize =  response.per_page;
         this.totalDataCount = response.total;
         this.totalDataPages = response.total_pages;
@@ -67,10 +66,6 @@ export class UserListComponent implements OnInit {
       error => {
         this.spinner.hide();
       });
-  }
-
-  pageChanges(event){
-    this.getUserContactList(this.dataSource.paginator.pageIndex + 1);
   }
 
   applyFilter(value: string){
