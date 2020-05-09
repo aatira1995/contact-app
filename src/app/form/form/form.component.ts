@@ -10,7 +10,7 @@ import { DataService } from '../data.service';
 })
 export class FormComponent implements OnInit {
 
-  private detailsForm = new FormGroup({
+  detailsForm = new FormGroup({
     firstName: new FormControl(),
     email : new FormControl(),
     phone : new FormControl()

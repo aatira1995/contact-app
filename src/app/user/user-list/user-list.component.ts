@@ -15,10 +15,10 @@ import _ from 'lodash';
 })
 export class UserListComponent implements OnInit {
 
-  private totalDataCount: Number = 0;
-  private totalDataPages: Number = 0;
-  private currentPage: Number = 1;
-  private pageSize: Number = 0;
+  totalDataCount: Number = 0;
+  totalDataPages: Number = 0;
+  currentPage: Number = 1;
+  pageSize: Number = 0;
 
   constructor(
     private userDataService: UserDataService,

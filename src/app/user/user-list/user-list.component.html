@@ -1,7 +1,7 @@
-<div *ngIf="dataSource.length == 0">
+<div *ngIf="!dataSource">
   No contact informations
 </div>
-<div *ngIf="dataSource.length > 0" class="mat-elevation-z8 table-div">
+<div *ngIf="dataSource" class="mat-elevation-z8 table-div">
   <!-- <mat-form-field>
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">

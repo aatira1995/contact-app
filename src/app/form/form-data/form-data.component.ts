@@ -9,7 +9,7 @@ import { DataService } from '../data.service';
 })
 export class FormDataComponent implements OnInit {
 
-  private formData;
+  formData;
 
   constructor(
     private router: Router,
