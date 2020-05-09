@@ -4,6 +4,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import { MatFormFieldModule, MatInputModule  } from '@angular/material';
 
 import { UserRoutingModule } from './user-routing.module';
 import { UserListComponent } from './user-list/user-list.component';
@@ -17,7 +18,9 @@ import { UserListComponent } from './user-list/user-list.component';
     MatTableModule,
     NgxSpinnerModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class UserModule { }

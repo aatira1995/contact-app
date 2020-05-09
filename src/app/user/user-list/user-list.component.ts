@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ContentChild } from '@angular/core';
 import { UserDataService } from '../user-data.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ContactInterface } from '../../common/interfaces/contact.interface';
@@ -25,29 +25,31 @@ export class UserListComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) { }
 
-  dataSource = new MatTableDataSource<ContactInterface>();
+  dataSource = new MatTableDataSource<ContactInterface>([]);
   displayedColumns: string[] = ['first_name', 'last_name', 'email'];
 
-  @ViewChild(MatPaginator,  {static: false}) 
-  set paginator(value: MatPaginator) {
-    this.dataSource.paginator = value;
-  }
+  // @ViewChild(MatPaginator,  {static: false}) 
+  // set paginator(value: MatPaginator) {
+  //   this.dataSource.paginator = value;
+  // }
 
-  @ViewChild(MatSort, {static: false})
-  set sort(value: MatSort) {
-    this.dataSource.sort = value;
-  }
+  @ViewChild(MatPaginator,  {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort,  {static: true}) sort: MatSort;
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
     this.getUserContactList(this.currentPage);
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   getUserContactList(pageNumber){
     this.spinner.show();
     this.userDataService.getUserList('users?page=' + pageNumber)
       .subscribe(response => {
-        this.dataSource = response.data.map(data => {
+        this.dataSource.data = response.data.map(data => {
           let contact = {
             first_name: data.first_name,
             last_name: data.last_name,
@@ -55,7 +57,8 @@ export class UserListComponent implements OnInit {
           }
           return contact
         });
-        this.dataSource = _.sortBy(this.dataSource, ['first_name', 'last_name', 'email']);
+        this.dataSource.data = _.sortBy(this.dataSource.data, ['first_name', 'last_name', 'email']);
+        this.dataSource.paginator = this.paginator;
         this.pageSize =  response.per_page;
         this.totalDataCount = response.total;
         this.totalDataPages = response.total_pages;
@@ -66,8 +69,12 @@ export class UserListComponent implements OnInit {
       });
   }
 
-  pageChanges(){
+  pageChanges(event){
     this.getUserContactList(this.dataSource.paginator.pageIndex + 1);
+  }
+
+  applyFilter(value: string){
+    this.dataSource.filter = value.trim().toLowerCase();
   }
 
 }

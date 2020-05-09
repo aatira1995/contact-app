@@ -1,12 +1,12 @@
-<div *ngIf="!dataSource">
+<div *ngIf="dataSource.length == 0">
   No contact informations
 </div>
-<div *ngIf="dataSource" class="mat-elevation-z8 table-div">
-  <!-- <mat-form-field>
+<div class="mat-elevation-z8 table-div">
+  <mat-form-field>
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
-  </mat-form-field> -->
-  <table mat-table [dataSource]="dataSource" matSort >
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. ium">
+  </mat-form-field>
+  <table mat-table [dataSource]="dataSource" matSort matSortStart="desc">
 
     <ng-container matColumnDef="first_name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
@@ -26,6 +26,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <mat-paginator [pageSize]="pageSize" [length]="totalDataCount" (page)="pageChanges()"></mat-paginator>
+  <mat-paginator [pageSize]="pageSize" [length]="totalDataCount" (page)="pageChanges($event)"></mat-paginator>
 </div>
 <ngx-spinner></ngx-spinner>
