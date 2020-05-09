@@ -1,0 +1,17 @@
+table {
+    width: 100%;
+}
+th {
+    font-weight: bold;
+    font-size: 20px;
+    background-color: whitesmoke;
+}
+
+tr:hover{
+    background-color: darkgray;
+}
+
+.table-div{
+    margin: auto;
+    width: 80%;
+}

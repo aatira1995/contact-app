@@ -1,0 +1,19 @@
+
+<div class="data-container">
+    <button (click)="goBack()">Go Back</button>
+
+    <h3 style="text-align: center;color:gray">Submitted Details: </h3>
+
+    <div style="text-align: center;">
+        <div>
+            <p *ngIf="!formData.name && !formData.email && !formData.phone">
+                No details found
+            </p>
+        </div>
+        <div *ngIf="formData.name || formData.email || formData.phone">
+            <p *ngIf="formData.name"><span>Name:</span> {{formData.name}}</p>
+            <p *ngIf="formData.email"><span>Email:</span> {{formData.email}}</p>
+            <p *ngIf="formData.phone"><span>Phone:</span> {{formData.phone}}</p>
+        </div>
+    </div>
+</div>

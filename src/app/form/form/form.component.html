@@ -1,0 +1,37 @@
+<div>
+    <div class="form-container">
+        <h3 style="text-align: center; color: darkgray;">Contact Form</h3>
+        <form [formGroup]="detailsForm" class="form-item">
+            <div class="control-div">
+                <label>First Name*</label>
+                <input type="text" required formControlName="firstName">
+            </div>
+            <div *ngIf="formErrors.firstName" class="alert">
+                <div>
+                  {{formErrors.firstName}}
+                </div>
+            </div>
+            <div class="control-div">
+                <label>Email*</label>
+                <input type="text" placeholder="example@gmail.com" required formControlName="email">
+            </div>
+            <div *ngIf="formErrors.email" class="alert">
+                <div>
+                  {{formErrors.email}}
+                </div>
+            </div>
+            <div class="control-div">
+                <label>Phone*</label>
+                <input type="text" required formControlName="phone">
+            </div>
+            <div *ngIf="formErrors.phone" class="alert">
+                <div>
+                  {{formErrors.phone}}
+                </div>
+            </div>
+            <div class="button-div">
+                <button [disabled]="!detailsForm.valid" [ngClass]="!detailsForm.valid?'button-disabled':null" (click)="onSubmit()">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

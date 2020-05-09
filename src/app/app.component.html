@@ -1,0 +1,10 @@
+
+<div class="container">
+    <h3 style="color: black;text-align: center;padding: 2px;">Choose a section to continue</h3>
+    <div class="button-container">
+        <button routerLink="user" [ngClass]="(userButton)?'button-selected': null" (click)="changeSelectedButton()">Users</button>
+        <button routerLink="form" [ngClass]="(!userButton)?'button-selected': null" (click)="changeSelectedButton()">Forms</button>
+    </div>
+</div>
+
+<router-outlet></router-outlet>

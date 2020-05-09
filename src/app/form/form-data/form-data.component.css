@@ -1,0 +1,28 @@
+button{
+    padding:15px 50px;
+	width:auto;
+	background:darkgray;
+	border:none;
+	color:black;
+	cursor: pointer;
+	display:inline-block;
+    clear:right;
+    border-radius: 50px;
+	-webkit-transition:0.2s ease all;
+	   -moz-transition:0.2s ease all;
+	    -ms-transition:0.2s ease all;
+	     -o-transition:0.2s ease all;
+	        transition:0.2s ease all;
+}
+
+.data-container{
+    width: 50%;
+    margin: auto;
+    border: 1px solid gray;
+    padding: 5px;
+}
+
+span{
+    font-weight: bold;
+    color: darkgray;
+}

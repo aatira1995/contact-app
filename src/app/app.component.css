@@ -1,0 +1,30 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+
+button{
+    background-color: whitesmoke;
+    border: 1px solid blue;
+    border-radius: 2px;
+    width: 40%;
+    padding: 5px;
+}
+
+button:hover{
+    background-color: lightgray;
+    color: black;
+}
+
+.button-selected{
+    background-color: darkgrey;
+    border: 1px solid darkgray;
+    color: black;
+}
