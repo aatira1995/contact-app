@@ -4,6 +4,12 @@ import { FormComponent } from './form/form.component';
 import { FormDataComponent } from './form-data/form-data.component';
 import { FormRoutingModule } from './form-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
+
+const routes: Routes = [
+  { path: '', component: FormComponent },
+  { path: 'form-detail', component: FormDataComponent }
+];
 
 @NgModule({
   declarations: [FormComponent, FormDataComponent],
@@ -11,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forChild(routes)
   ]
 })
 export class FormModule { }

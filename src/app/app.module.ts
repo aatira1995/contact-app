@@ -5,6 +5,7 @@ import {  HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     NoopAnimationsModule
   ],
-  providers: [],
+  providers: [NgxSpinnerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
